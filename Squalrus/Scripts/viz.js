@@ -15,6 +15,25 @@
     siteNameElement.textContent = site;
     bod.appendChild(siteNameElement);
 
+    var scroller = document.createElement("span");
+    scroller.className = "scroller";
+    bod.appendChild(scroller);
+
+    (function scroll(tagName) {
+        var interval = 8,
+            velocity = 5,
+            element = document.getElementsByClassName("scroller")[0],
+
+            // Original positions
+            bounds = element.getBoundingClientRect(),
+            left = bounds.left;
+
+        setInterval(function () {
+            left += velocity;
+            element.style.left = left + "px";
+        }, interval);
+    })();
+
     (function twitch(tagName) {
         var interval = 10,
             element = document.getElementsByTagName("h1")[0],
@@ -27,8 +46,6 @@
             // Twitch offset
             twitchLeft = 0,
             twitchTop = 0;
-
-        console.log("L: " + originalLeft);
 
         setInterval(function () {
             setTimeout(function () {
